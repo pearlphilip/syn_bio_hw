@@ -5,9 +5,10 @@ Created on Fri Sep 30 13:14:07 2016
 @author: Madeline and Pearl
 """
 import tellurium as te
-            
-antString1 = '''
-            model questions2and3()
+
+# Question 2
+modelstring1 = '''
+                model question2()
                 
                 // DNA -> protein = ( rateOfRNA/DNA * DNA ) * rateOfProtein/RNA
                 J1: -> S3; (1/10 * S1) * 1/10;
@@ -23,17 +24,24 @@ antString1 = '''
                 // S1 is DNA, S2 is RNA, S3 is protein
                 S1 = 1; S2 = 0; S3 = 0;
                 
-            end'''
+                end
+                '''
 
-r = te.loada(antString)
-model = r.simulate(0,18 * 60 * 60,10000) # End time: 18 hr * 60 min/hr * 60 sec/min
-r.plot(model)
+r1 = te.loada(modelstring1)
 
-antString2 = '''
-            model question4()                
+# Question 3
+model = r1.simulate(0,18 * 60 * 60,10000) 
+# End time: 18 hr * 60 min/hr * 60 s/min
+r1.plot(model)
+
+# Question 4
+modelstring2 = '''
+                model question4()                
                 
-                at (time % (60 * 20) == 0): S1 = 2*S1 // doubles DNA every 20 minutes
-                at (time % (60 * 60) == 0): S3 = S3 - 1 // degrades protein every hour
+                at (time % (60 * 20) == 0): S1 = 2*S1 
+                // doubles DNA every 20 minutes
+                at (time % (60 * 60) == 0): S3 = S3 - 1 
+                // degrades protein every hour
                 
                 
                 // DNA -> protein = ( rateOfRNA/DNA * DNA ) * rateOfProtein/RNA
@@ -50,8 +58,10 @@ antString2 = '''
                 // S1 is DNA, S2 is RNA, S3 is protein
                 S1 = 1; S2 = 0; S3 = 0;
                 
-            end'''
+                end
+                '''
 
-r2 = te.loada(antString2)
-model = r2.simulate(0,18 * 60 * 60,10000) # 18 hr * 60 min/hr * 60 sec/min
+r2 = te.loada(modelstring2)
+model = r2.simulate(0,18 * 60 * 60,10000) 
+# End time: 18 hr * 60 min/hr * 60 s/min
 r2.plot(model)
