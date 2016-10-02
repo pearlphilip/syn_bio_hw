@@ -10,6 +10,7 @@ import tellurium as te
 modelstring1 = '''
                 model question2()
                 
+                // The two processes have been collapsed into one expression
                 // DNA -> protein = ( rateOfRNA/DNA * DNA ) * rateOfProtein/RNA
                 J1: -> S3; (1/10 * S1) * 1/10;
                 J2: -> S3; (1/10 * S1) * 1/20;
@@ -22,6 +23,7 @@ modelstring1 = '''
                 J9: -> S3; (1/1000 * S1) * 1/30;
                 
                 // S1 is DNA, S2 is RNA, S3 is protein
+                // Initial amounts of each species:
                 S1 = 1; S2 = 0; S3 = 0;
                 
                 end
@@ -30,20 +32,20 @@ modelstring1 = '''
 r1 = te.loada(modelstring1)
 
 # Question 3
-model = r1.simulate(0,18 * 60 * 60,10000) 
+model1 = r1.simulate(0,18 * 60 * 60,10000) 
 # End time: 18 hr * 60 min/hr * 60 s/min
-r1.plot(model)
+r1.plot(model1)
 
 # Question 4
 modelstring2 = '''
                 model question4()                
                 
-                at (time % (60 * 20) == 0): S1 = 2*S1 
-                // doubles DNA every 20 minutes
-                at (time % (60 * 60) == 0): S3 = S3 - 1 
-                // degrades protein every hour
+                at (time % (20 * 60) == 0): S1 = 2*S1 
+                // DNA doubles every 20 minutes (in seconds)
+                at (time % (1 * 60 * 60) == 0): S3 = S3 - 1 
+                // Protein degrades every hour (in seconds)
                 
-                
+                // The two processes have been collapsed into one expression
                 // DNA -> protein = ( rateOfRNA/DNA * DNA ) * rateOfProtein/RNA
                 J1: -> S3; (1/10 * S1) * 1/10;
                 J2: -> S3; (1/10 * S1) * 1/20;
@@ -56,13 +58,13 @@ modelstring2 = '''
                 J9: -> S3; (1/1000 * S1) * 1/30;
                 
                 // S1 is DNA, S2 is RNA, S3 is protein
+                // Initial amounts of each species:
                 S1 = 1; S2 = 0; S3 = 0;
                 
-                protein = S3;
                 end
                 '''
 
 r2 = te.loada(modelstring2)
-model = r2.simulate(0,18 * 60 * 60,10000) 
+model2 = r2.simulate(0,18 * 60 * 60,10000) 
 # End time: 18 hr * 60 min/hr * 60 s/min
-r2.plot(model)
+r2.plot(model2)
