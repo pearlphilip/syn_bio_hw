@@ -58,6 +58,7 @@ modelstring2 = '''
                 // S1 is DNA, S2 is RNA, S3 is protein
                 S1 = 1; S2 = 0; S3 = 0;
                 
+                protein = S3;
                 end
                 '''
 
