@@ -12,15 +12,18 @@ modelstring1 = '''
                 
                 // The two processes have been collapsed into one expression
                 // DNA -> protein = ( rateOfRNA/DNA * DNA ) * rateOfProtein/RNA
-                J1: -> S3; (1/10 * S1) * 1/10;
-                J2: -> S3; (1/10 * S1) * 1/20;
-                J3: -> S3; (1/10 * S1) * 1/30;
-                J4: -> S3; (1/100 * S1) * 1/10;
-                J5: -> S3; (1/100 * S1) * 1/20;
-                J6: -> S3; (1/100 * S1) * 1/30;
-                J7: -> S3; (1/1000 * S1) * 1/10;
-                J8: -> S3; (1/1000 * S1) * 1/20;
-                J9: -> S3; (1/1000 * S1) * 1/30;
+                
+                k1 = 1/10; k2 = 1/20; k3 = 1/30;
+                k4 = 1/10; k5 = 1/100; k6 = 1/1000;
+                J1: -> S3; (k4 * S1) * k1;
+                J2: -> S3; (k4 * S1) * k2;
+                J3: -> S3; (k4 * S1) * k3;
+                J4: -> S3; (k5 * S1) * k1;
+                J5: -> S3; (k5 * S1) * k2;
+                J6: -> S3; (k5 * S1) * k3;
+                J7: -> S3; (k6 * S1) * k1;
+                J8: -> S3; (k6 * S1) * k2;
+                J9: -> S3; (k6 * S1) * k3;
                 
                 // S1 is DNA, S2 is RNA, S3 is protein
                 // Initial amounts of each species:
