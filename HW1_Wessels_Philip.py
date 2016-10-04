@@ -6,7 +6,7 @@ Created on Fri Sep 30 13:14:07 2016
 """
 import tellurium as te
 
-# Question 2
+### Question 2
 modelstring1 = '''
                 model question2()
                 
@@ -34,12 +34,15 @@ modelstring1 = '''
 
 r1 = te.loada(modelstring1)
 
-# Question 3
+### Question 3
 model1 = r1.simulate(0,18 * 60 * 60,10000) 
 # End time: 18 hr * 60 min/hr * 60 s/min
 r1.plot(model1)
 
-# Question 4
+### Question 4
+# Re-use model code above, removing the head line "model question2()" and replacing with our new model
+modelstring1_body_info = '\n'.join(modelstring1.split('\n')[2:])
+
 modelstring2 = '''
                 model question4()                
                 
@@ -47,25 +50,9 @@ modelstring2 = '''
                 // DNA doubles every 20 minutes (in seconds)
                 at (time % (1 * 60 * 60) == 0): S3 = S3 - 1 
                 // Protein degrades every hour (in seconds)
-                
-                // The two processes have been collapsed into one expression
-                // DNA -> protein = ( rateOfRNA/DNA * DNA ) * rateOfProtein/RNA
-                J1: -> S3; (1/10 * S1) * 1/10;
-                J2: -> S3; (1/10 * S1) * 1/20;
-                J3: -> S3; (1/10 * S1) * 1/30;
-                J4: -> S3; (1/100 * S1) * 1/10;
-                J5: -> S3; (1/100 * S1) * 1/20;
-                J6: -> S3; (1/100 * S1) * 1/30;
-                J7: -> S3; (1/1000 * S1) * 1/10;
-                J8: -> S3; (1/1000 * S1) * 1/20;
-                J9: -> S3; (1/1000 * S1) * 1/30;
-                
-                // S1 is DNA, S2 is RNA, S3 is protein
-                // Initial amounts of each species:
-                S1 = 1; S2 = 0; S3 = 0;
-                
-                end
-                '''
+              ''' 
+
+modelstring2 += modelstring1_body_info
 
 r2 = te.loada(modelstring2)
 model2 = r2.simulate(0,18 * 60 * 60,10000) 
