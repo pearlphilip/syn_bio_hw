@@ -49,20 +49,20 @@ modelstring2 = '''
                 
                 at (time % (20 * 60) == 0): S1 = 2*S1 
                 // DNA doubles every 20 minutes (in seconds)
-                //  at (time % (1 * 60 * 60) == 0): S3 = S3 - 1 
-                // Protein degrades every hour (in seconds) --> add this to every model (line)
-                // use rate constant to apply this to models instead of event
+                
+                // Protein degrades every hour (in seconds) 
+                // We use a rate constant to denote this
 
-                k7 = 1/(60*60);
-                J10: S3 -> ; k7 * S2
-                J11: S4 -> ; k7 * S2
-                J12: S5 -> ; k7 * S2
-                J13: S6 -> ; k7 * S2
-                J14: S7 -> ; k7 * S2
-                J15: S8 -> ; k7 * S2
-                J16: S9 -> ; k7 * S2
-                J17: S10 -> ; k7 * S2
-                J18: S11 -> ; k7 * S2
+                k7 = 1/(1*60*60);
+                J10: S3 -> ; k7 * S3
+                J11: S4 -> ; k7 * S4
+                J12: S5 -> ; k7 * S5
+                J13: S6 -> ; k7 * S6
+                J14: S7 -> ; k7 * S7
+                J15: S8 -> ; k7 * S8
+                J16: S9 -> ; k7 * S9
+                J17: S10 -> ; k7 * S10
+                J18: S11 -> ; k7 * S11
              ''' 
 
 modelstring2 += modelstring1_body_info
