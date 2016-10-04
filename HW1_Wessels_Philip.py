@@ -52,7 +52,18 @@ modelstring2 = '''
                 //  at (time % (1 * 60 * 60) == 0): S3 = S3 - 1 
                 // Protein degrades every hour (in seconds) --> add this to every model (line)
                 // use rate constant to apply this to models instead of event
-              ''' 
+
+                k7 = 1/10; k8 = 1/(60*60);
+                J10: -> S3; k7 * S2 * k8
+                J11: -> S4; k7 * S2 * k8
+                J12: -> S5; k7 * S2 * k8
+                J13: -> S6; k7 * S2 * k8
+                J14: -> S7; k7 * S2 * k8
+                J15: -> S8; k7 * S2 * k8
+                J16: -> S9; k7 * S2 * k8
+                J17: -> S10; k7 * S2 * k8
+                J18: -> S11; k7 * S2 * k8
+             ''' 
 
 modelstring2 += modelstring1_body_info
 
