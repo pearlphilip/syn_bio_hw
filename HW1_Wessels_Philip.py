@@ -54,15 +54,15 @@ modelstring2 = '''
                 // use rate constant to apply this to models instead of event
 
                 k7 = 1/(60*60);
-                J10: -> S3; k7 * S2
-                J11: -> S4; k7 * S2
-                J12: -> S5; k7 * S2
-                J13: -> S6; k7 * S2
-                J14: -> S7; k7 * S2
-                J15: -> S8; k7 * S2
-                J16: -> S9; k7 * S2
-                J17: -> S10; k7 * S2
-                J18: -> S11; k7 * S2
+                J10: S3 -> ; k7 * S2
+                J11: S4 -> ; k7 * S2
+                J12: S5 -> ; k7 * S2
+                J13: S6 -> ; k7 * S2
+                J14: S7 -> ; k7 * S2
+                J15: S8 -> ; k7 * S2
+                J16: S9 -> ; k7 * S2
+                J17: S10 -> ; k7 * S2
+                J18: S11 -> ; k7 * S2
              ''' 
 
 modelstring2 += modelstring1_body_info
