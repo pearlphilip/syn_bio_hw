@@ -11,10 +11,10 @@ modelstring1 = '''
                 model question2()
                 
                 // The two processes have been collapsed into one expression
-                // DNA -> protein = ( rateOfRNA/DNA * DNA ) * rateOfProtein/RNA
+                // DNA -> Protein = (RateConstantDNAtoRNA * DNA) * RateConstantRNAtoProtein
                 
-                k1 = 1/10; k2 = 1/20; k3 = 1/30;
-                k4 = 1/10; k5 = 1/100; k6 = 1/1000;
+                k1 = 1 / 10; k2 = 1 / 20; k3 = 1 / 30;
+                k4 = 1 / 10; k5 = 1 / 100; k6 = 1 / 1000;
                 J1: -> S3; (k4 * S1) * k1;
                 J2: -> S4; (k4 * S1) * k2;
                 J3: -> S5; (k4 * S1) * k3;
@@ -25,49 +25,49 @@ modelstring1 = '''
                 J8: -> S10; (k6 * S1) * k2;
                 J9: -> S11; (k6 * S1) * k3;
                 
-                // S1 is DNA, S2 is RNA, S3-S11 are protein counts
+                // S1 is DNA, S2 is RNA, S3 to S11 are protein products
                 // Initial amounts of each species:
                 S1 = 1; S2 = 0; S3 = 0; S4 = 0; S5 = 0; S6 = 0;
                 S7 = 0; S8 = 0; S9 = 0; S10 = 0; S11 = 0;
-                
+               
                 end
                 '''
 
 r1 = te.loada(modelstring1)
 
 ### Question 3
-model1 = r1.simulate(0,18 * 60 * 60,10000) 
+model1 = r1.simulate(0, 18 * 60 * 60, 1000) 
 # End time: 18 hr * 60 min/hr * 60 s/min
 r1.plot(model1)
 
 ### Question 4
-# Re-use model code above, removing the head line "model question2()" and replacing with our new model
+# Re-use model code above, removing the head line "model question2()" 
+# and replacing with our new model
 modelstring1_body_info = '\n'.join(modelstring1.split('\n')[2:])
 
 modelstring2 = '''
                 model question4()                
                 
-                at (time % (20 * 60) == 0): S1 = 2*S1 
+                at (time % (20 * 60) == 0): S1 = 2 * S1 
                 // DNA doubles every 20 minutes (in seconds)
-                //  at (time % (1 * 60 * 60) == 0): S3 = S3 - 1 
-                // Protein degrades every hour (in seconds) --> add this to every model (line)
-                // use rate constant to apply this to models instead of event
+                
+                // Protein degrades every hour (in seconds) 
+                // We use a rate constant k7 to denote this
 
-                k7 = 1/(60*60);
-                J10: S3 -> ; k7 * S2
-                J11: S4 -> ; k7 * S2
-                J12: S5 -> ; k7 * S2
-                J13: S6 -> ; k7 * S2
-                J14: S7 -> ; k7 * S2
-                J15: S8 -> ; k7 * S2
-                J16: S9 -> ; k7 * S2
-                J17: S10 -> ; k7 * S2
-                J18: S11 -> ; k7 * S2
+                k7 = 1 / (1 * 60 * 60);
+                J10: S3 -> ; k7 * S3
+                J11: S4 -> ; k7 * S4
+                J12: S5 -> ; k7 * S5
+                J13: S6 -> ; k7 * S6
+                J14: S7 -> ; k7 * S7
+                J15: S8 -> ; k7 * S8
+                J16: S9 -> ; k7 * S9
+                J17: S10 -> ; k7 * S10
+                J18: S11 -> ; k7 * S11
              ''' 
 
 modelstring2 += modelstring1_body_info
-
 r2 = te.loada(modelstring2)
-model2 = r2.simulate(0,18 * 60 * 60,10000) 
+model2 = r2.simulate(0, 18 * 60 * 60, 1000) 
 # End time: 18 hr * 60 min/hr * 60 s/min
 r2.plot(model2)
