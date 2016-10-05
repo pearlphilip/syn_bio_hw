@@ -48,22 +48,21 @@ modelstring1_body_info = '\n'.join(modelstring1.split('\n')[2:])
 modelstring2 = '''
                 model question4()                
                 
-                at (time % (20 * 60) == 0): S1 = 2 * S1 
                 // DNA doubles every 20 minutes (in seconds)
-                
+                J10: -> S1; 2 * ( 1 / ( 20 * 60 ) ) 
                 // Protein degrades every hour (in seconds) 
                 // We use a rate constant k7 to denote this
 
                 k7 = 1 / (1 * 60 * 60);
-                J10: S3 -> ; k7 * S3
-                J11: S4 -> ; k7 * S4
-                J12: S5 -> ; k7 * S5
-                J13: S6 -> ; k7 * S6
-                J14: S7 -> ; k7 * S7
-                J15: S8 -> ; k7 * S8
-                J16: S9 -> ; k7 * S9
-                J17: S10 -> ; k7 * S10
-                J18: S11 -> ; k7 * S11
+                J11: S3 -> ; k7 * S3
+                J12: S4 -> ; k7 * S4
+                J13: S5 -> ; k7 * S5
+                J14: S6 -> ; k7 * S6
+                J15: S7 -> ; k7 * S7
+                J16: S8 -> ; k7 * S8
+                J17: S9 -> ; k7 * S9
+                J18: S10 -> ; k7 * S10
+                J19: S11 -> ; k7 * S11
              ''' 
 
 modelstring2 += modelstring1_body_info
