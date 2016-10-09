@@ -47,10 +47,10 @@ modelstring1_body_info = '\n'.join(modelstring1.split('\n')[2:])
 
 modelstring2 = '''
                 model question4()                
-                
-                at (time % (20 * 60) == 0): S1 = 2 * S1 
+               
+                at (time % (20 * 60) == 0): S1 = 2 * S1
                 // DNA doubles every 20 minutes (in seconds)
-                
+
                 // Protein degrades every hour (in seconds) 
                 // We use a rate constant k7 to denote this
 
