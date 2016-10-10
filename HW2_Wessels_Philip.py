@@ -29,6 +29,8 @@ r1.plot(model1);
 modelstring1c1 =  '''
                 model question1c1()
                 
+                // When k1=k2=k3!=1
+                
                 k1 = 2; k2 = 2; k3 = 2;
                 J1: A + B -> 2B; k1 * A * B;
                 J2: B + C -> 2C; k2 * B * C;
@@ -47,6 +49,8 @@ r2.plot(model2);
 modelstring1c2 =  '''
                 model question1c2()
                 
+                // When k1!=k2=k3
+                
                 k1 = 2; k2 = 1; k3 = 1;
                 J1: A + B -> 2B; k1 * A * B;
                 J2: B + C -> 2C; k2 * B * C;
@@ -64,6 +68,8 @@ r3.plot(model3);
 ### Question 1c, Trial 3
 modelstring1c3 =  '''
                 model question1c3()
+                
+                // When k1!=k2!=k3
                 
                 k1 = 2; k2 = 3; k3 = 5;
                 J1: A + B -> 2B; k1 * A * B;
