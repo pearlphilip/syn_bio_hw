@@ -112,6 +112,7 @@ plt.show()
 
 ### Question 3
 modelstring3 = '''
+                # Protein1 is Insulin, Protein2 is GFP
                 R1: -> RNA1; k1;
                 R2: -> Protein1; k2 * RNA1;
                 R3: -> RNA2; k3;
