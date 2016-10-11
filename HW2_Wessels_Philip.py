@@ -112,33 +112,45 @@ plt.show()
 
 ### Question 3
 modelstring3 = '''
-                R1: -> RNA; k1;
-                R2: -> Protein; k2 * RNA;
+                R1: -> RNA1; k1;
+                R2: -> Protein1; k2 * RNA1;
+                R3: -> RNA2; k3;
+                R4: -> Protein2; k4 * RNA2
  
                 #variables that get set by python code
-                RNA = 0; Protein = 0; k1 = 0; k2 = 0;
+                RNA1 = 0; Protein1 = 0; RNA2 = 0; Protein2 = 0;
+                k1 = 0; k2 = 0; k3 = 0; k4 = 0;
                 
                 '''
 r3 = te.loada(modelstring3)
 # Reciprocals of the rate constants
 reciprocal_k1 = [10, 100, 1000]
 reciprocal_k2 = [10, 20, 30]
+reciprocal_k3 = [20, 200, 2000]
+reciprocal_k4 = [20, 40, 60]
 
 for i in reciprocal_k1:
     for j in reciprocal_k2:
-        r3.RNA = 0
-        r3.Protein = 0
-        r3.k1 = 1.0/i
-        r3.k2 = 1.0/j
+        for k in reciprocal_k3:
+            for l in reciprocal_k4:
+                r3.RNA1 = 0
+                r3.Protein1 = 0
+                r3.RNA2 = 0
+                r3.Protein2 = 0
+                r3.k1 = 1.0/i
+                r3.k2 = 1.0/j
+                r3.k3 = 1.0/k
+                r3.k4 = 1.0/l
+                
         
-        model3 = r3.simulate(0, 18 * 60 * 60, 1000) 
-        # End time: 18 hr * 60 min/hr * 60 s/min
-        r3.plot(model3, title="k1 = every %is k2 = every %is"%(i, j))
+                model3 = r3.simulate(0, 18 * 60 * 60, 1000) 
+                # End time: 18 hr * 60 min/hr * 60 s/min
+                r3.plot(model3, title="k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
         
-        # Saving the model into a csv file
-        df_model3 = pd.DataFrame(model3)
-        df_model3.columns = ['Time(s)', 'RNA', 'Protein']
-        output_filename = 'k1_%is_k2_%is.csv'%(i,j)
-        output_path = os.path.join('./csv_files', output_filename)
-        df_model3.to_csv(output_path)
+                # Saving the model into a csv file
+                df_model3 = pd.DataFrame(model3)
+                df_model3.columns = ['Time(s)', 'RNA1', 'Protein1', 'RNA2', 'Protein2']
+                output_filename = 'k1_%is_k2_%is_k3_%is_k4_%is.csv'%(i, j, k, l)
+                output_path = os.path.join('./csv_files', output_filename)
+                df_model3.to_csv(output_path)
         
