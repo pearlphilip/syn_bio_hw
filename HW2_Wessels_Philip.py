@@ -117,18 +117,22 @@ modelstring3 = '''
                 R2: -> Protein1; k2 * RNA1;
                 R3: -> RNA2; k3;
                 R4: -> Protein2; k4 * RNA2
+                R5: RNA1 -> ; k_deg1 * RNA1 
+                R6: RNA2 -> ; k_deg2 * RNA1 
+                R7: -> Vol; k_cell_div * Vol
  
                 #variables that get set by python code
-                RNA1 = 0; Protein1 = 0; RNA2 = 0; Protein2 = 0;
-                k1 = 0; k2 = 0; k3 = 0; k4 = 0;
+                RNA1 = 0; Protein1 = 0; RNA2 = 0; Protein2 = 0; Vol = 10
+                k1 = 0; k2 = 0; k3 = 0; k4 = 0; 
+                k_deg1 = 1/3600; k_deg2 = 2/3600; k_cell_div = 3/3600;
                 
                 '''
 r3 = te.loada(modelstring3)
 # Reciprocals of the rate constants
 reciprocal_k1 = [10, 100, 1000]
 reciprocal_k2 = [10, 20, 30]
-reciprocal_k3 = [20, 200, 2000]
-reciprocal_k4 = [20, 40, 60]
+reciprocal_k3 = [200, 300, 500]
+reciprocal_k4 = [50, 100, 150]
 
 for i in reciprocal_k1:
     for j in reciprocal_k2:
@@ -144,14 +148,25 @@ for i in reciprocal_k1:
                 r3.k4 = 1.0/l
                 
         
-                model3 = r3.simulate(0, 18 * 60 * 60, 1000) 
+                model3 = r3.simulate(0, 100, 1000) 
                 # End time: 18 hr * 60 min/hr * 60 s/min
                 r3.plot(model3, title="k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
-        
+                
                 # Saving the model into a csv file
                 df_model3 = pd.DataFrame(model3)
-                df_model3.columns = ['Time(s)', 'RNA1', 'Protein1', 'RNA2', 'Protein2']
+                df_model3.columns = ['Time(s)', 'RNA1', 'Protein1', 'RNA2', 'Protein2', 'Vol']
                 output_filename = 'k1_%is_k2_%is_k3_%is_k4_%is.csv'%(i, j, k, l)
                 output_path = os.path.join('./csv_files', output_filename)
                 df_model3.to_csv(output_path)
-        
+"""
+# simulate returns a numpy array
+# request columns 'time','RNA','Protein','vol'
+m = r.simulate(0,100,100,['time','RNA','Protein','vol'])
+
+# plotting code
+import matplotlib.pyplot as plt
+# want to plot RNA and protein per cell
+plt.plot(m[:,0], m[:,1]/m[:,3], label='RNA') # divide 2nd col by 4th col
+plt.plot(m[:,0], m[:,2]/m[:,3], label='Protein') # divide 3rd col by 4th col
+plt.legend()
+plt.show()"""
