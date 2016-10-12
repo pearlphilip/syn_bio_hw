@@ -116,15 +116,23 @@ modelstring3 = '''
                 R1: -> RNA1; k1;
                 R2: -> Protein1; k2 * RNA1;
                 R3: -> RNA2; k3;
-                R4: -> Protein2; k4 * RNA2
-                R5: RNA1 -> ; k_deg1 * RNA1 
-                R6: RNA2 -> ; k_deg2 * RNA1 
-                R7: -> Vol; k_cell_div * Vol
+                R4: -> Protein2; k4 * RNA2;
+                R5: RNA1 -> ; k_deg1 * RNA1; # RNA degradation
+                R6: RNA2 -> ; k_deg2 * RNA2; # RNA degradation
+                R7: -> Vol; k_cell_div * Vol; # Cell division
+                R8: -> RNA1; k_dilution * RNA1; # RNA dilution
+                R9: -> RNA2; k_dilution * RNA2; # RNA dilution
+                R10: -> Protein2; k_dilution * Protein2; # GFP dilution
  
                 #variables that get set by python code
                 RNA1 = 0; Protein1 = 0; RNA2 = 0; Protein2 = 0; Vol = 10
                 k1 = 0; k2 = 0; k3 = 0; k4 = 0; 
-                k_deg1 = 1/3600; k_deg2 = 2/3600; k_cell_div = 3/3600;
+                k_deg1 = 1/3600; k_deg2 = 2/3600; 
+                
+                # Dilution occurs as the cell divides, therefore k_cell_div = 
+                # k_dilution = 1.28 * (10 ** (-4)) calculated from standard 
+                # cell doubling time
+                k_cell_div = 1.28 *(10 ^(-4)); k_dilution = 1.28 *(10 ^(-4));
                 
                 '''
 r3 = te.loada(modelstring3)
@@ -150,7 +158,7 @@ for i in reciprocal_k1:
         
                 model3 = r3.simulate(0, 100, 1000) 
                 # End time: 18 hr * 60 min/hr * 60 s/min
-                r3.plot(model3, title="k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
+                #r3.plot(model3, title="k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
                 
                 # Saving the model into a csv file
                 df_model3 = pd.DataFrame(model3)
@@ -158,15 +166,14 @@ for i in reciprocal_k1:
                 output_filename = 'k1_%is_k2_%is_k3_%is_k4_%is.csv'%(i, j, k, l)
                 output_path = os.path.join('./csv_files', output_filename)
                 df_model3.to_csv(output_path)
-"""
-# simulate returns a numpy array
-# request columns 'time','RNA','Protein','vol'
-m = r.simulate(0,100,100,['time','RNA','Protein','vol'])
 
-# plotting code
-import matplotlib.pyplot as plt
-# want to plot RNA and protein per cell
-plt.plot(m[:,0], m[:,1]/m[:,3], label='RNA') # divide 2nd col by 4th col
-plt.plot(m[:,0], m[:,2]/m[:,3], label='Protein') # divide 3rd col by 4th col
-plt.legend()
-plt.show()"""
+                # want to plot RNA and protein per cell
+                plt.plot(model3[:,0], model3[:,1]/model3[:,5], label='RNA1') 
+                plt.plot(model3[:,0], model3[:,2]/model3[:,5], label='Protein1')
+                plt.plot(model3[:,0], model3[:,3]/model3[:,5], label='RNA2')
+                plt.plot(model3[:,0], model3[:,4]/model3[:,5], label='Protein2')
+                plt.title("k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
+                plt.legend()
+                plt.show()
+
+
