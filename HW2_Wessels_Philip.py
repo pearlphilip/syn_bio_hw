@@ -168,12 +168,20 @@ for i in reciprocal_k1:
                 df_model3.to_csv(output_path)
 
                 # want to plot RNA and protein per cell
-                plt.plot(model3[:,0], model3[:,1]/model3[:,5], label='RNA1') 
-                plt.plot(model3[:,0], model3[:,2]/model3[:,5], label='Protein1')
-                plt.plot(model3[:,0], model3[:,3]/model3[:,5], label='RNA2')
-                plt.plot(model3[:,0], model3[:,4]/model3[:,5], label='Protein2')
+                plt.plot(model3[:,0], model3[:,1]/model3[:,5], label='RNA1/UnitVol') 
+                plt.plot(model3[:,0], model3[:,2]/model3[:,5], label='Protein1/UnitVol')
+                plt.plot(model3[:,0], model3[:,3]/model3[:,5], label='RNA2/UnitVol')
+                plt.plot(model3[:,0], model3[:,4]/model3[:,5], label='Protein2/UnitVol')
                 plt.title("k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
+                plt.xlabel('Time in s') 
+                plt.ylabel('Concentrations of species')
                 plt.legend()
                 plt.show()
-
+                
+                plt.plot(model3[:,0], model3[:,5], label='Vol')
+                plt.title("k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
+                plt.xlabel('Time in s')   
+                plt.ylabel('Cell Volume')
+                plt.legend()
+                plt.show()
 
