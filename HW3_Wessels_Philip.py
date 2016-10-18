@@ -3,6 +3,7 @@ Created on Sat Oct 08 16:42:17 2016
 
 @author: Madeline and Pearl
 """
+import pandas as pd
 import tellurium as te
 
 # Question 2
@@ -53,41 +54,41 @@ modelstring3 =  '''
                 // Note K5, K15 to K18 are first order rate constants for gene 
                 // expression from DNA species P1 to P5, calculated in the HW 
                 // document
-                K5 = 3.48 * (10 ** (-2))
-                K15 = 9.31 * (10 ** (-3))
-                K16 = 1.43 * (10 ** (-2))
-                K17 = 3.99 * (10 ** (-2))
-                K18 = 1.48 * (10 ** (-2))
+                K5 = 3.48 * (10 ^ (-2))
+                K15 = 9.31 * (10 ^ (-3))
+                K16 = 1.43 * (10 ^ (-2))
+                K17 = 3.99 * (10 ^ (-2))
+                K18 = 1.48 * (10 ^ (-2))
 
                 // FAEE biosynthesis
                 R6: => FA; K1
                     // TesA => TesA + FA; TesA is a catalyst
                 R7: FA => acyl_CoA; FA * K2
-                    // FadD + FA => FadF + acyl_CoA; FA is a catalyst
+                    // FadD + FA => FadD + acyl_CoA; FA is a catalyst
                 R8: ETOH + acyl_CoA => FAEE; ETOH * acyl_CoA * K3
                     // AtfA + ETOH + acyl_CoA => AtfA + FAEE; AtfA is a catalyst
                 R9: => ETOH; K4
                     // Pdc_adhB => Pdc_AdhB + ETOH; Pdc_adhB is a catalyst
                
                 // Rate constants k1 to k4 from Supplementary Table 3
-                K1 = 4.9 * (10 ** (1))
-                K2 = 5.5 * (10 ** (-3))
-                K3 = 3.4 * (10 ** (-3))
-                K4 = 3.8 * (10 ** (2))
+                K1 = 4.9 * (10 ^ (1))
+                K2 = 5.5 * (10 ^ (-3))
+                K3 = 3.4 * (10 ^ (-3))
+                K4 = 3.8 * (10 ^ (2))
 
                 // FadR_ligand binding
                 R10: FadR + FA => FadR_FA; FadR * FA * K6
                 R11: FadR + acyl_CoA => FadR_acyl_CoA; FadR * acyl_CoA * K7
-                R12: FadR_FA => FadR + FA; FadR_DA * K8_FA
+                R12: FadR_FA => FadR + FA; FadR_FA * K8_FA
                 R13: FadR_acyl_CoA => FadR + acyl_CoA; FadR_acyl_CoA * K8_acyl_CoA
                 
                 // K6 and K7 are constants for association
                 // K8_FA and K8_acyl_CoA are constants for dissociation, 
                 // source shown in the HW document
-                K6 = 1.9 * (10 ** (-2))
-                K7 = 1.9 * (10 ** (-2))
-                K8_FA = 9.3 * (10 ** (-8))
-                K8_acyl_CoA = 9.3 * (10 ** (-11))
+                K6 = 1.9 * (10 ^ (-2))
+                K7 = 1.9 * (10 ^ (-2))
+                K8_FA = 9.3 * (10 ^ (-8))
+                K8_acyl_CoA = 9.3 * (10 ^ (-11))
                 
                 // FadR_Promoter binding
                 R14: FadR + P2 => FadR_P2; FadR * P2 * K9
@@ -100,12 +101,12 @@ modelstring3 =  '''
                 // K9,11,13 are constants for association
                 // K10,12,14 are constants for dissociation
                 // source shown in the HW document
-                K9 = 1.9 * (10 ** (-2))
-                K10 = 1.3 * (10 ** (-1))
-                K11 = 1.9 * (10 ** (-2))
-                K12 = 1.3 * (10 ** (-1))
-                K13 = 1.9 * (10 ** (-2))
-                K14 = 1.3 * (10 ** (-1))
+                K9 = 1.9 * (10 ^ (-2))
+                K10 = 1.3 * (10 ^ (-1))
+                K11 = 1.9 * (10 ^ (-2))
+                K12 = 1.3 * (10 ^ (-1))
+                K13 = 1.9 * (10 ^ (-2))
+                K14 = 1.3 * (10 ^ (-1))
 
                 // Reactions R20 to R37 account for loss of species due to
                 // cell growth associated dilution, degradation, and secretion
@@ -131,11 +132,11 @@ modelstring3 =  '''
                 R36: acyl_CoA => ; K22
                 R37: ETOH => ; K23
                 
-                K19 = 6.3 * (10 ** (-5))
-                K20 = 6.3 * (10 ** (-5))
-                K21 = 6.3 * (10 ** (-5))
-                K22 = 6.3 * (10 ** (-5))
-                K23 = 6.3 * (10 ** (-5))
+                K19 = 6.3 * (10 ^ (-5))
+                K20 = 6.3 * (10 ^ (-5))
+                K21 = 6.3 * (10 ^ (-5))
+                K22 = 6.3 * (10 ^ (-5))
+                K23 = 6.3 * (10 ^ (-5))
 
                 // DNA replication
                 
@@ -148,24 +149,39 @@ modelstring3 =  '''
                 R44: FadR_P3 => FadR_P3 + FadR_P3; K24
                 R45: FadR_P4 => FadR_P4 + FadR_P4; K24
                 
-                // P_init from Supplementary Table 3
-                P1 = 1.2 * (10 ** (-4)); 
-                P2 = 5.2 * (10 ** (-3)); 
-                P3 = 5.4 * (10 ** (-3));
-                P4 = 6.0 * (10 ** (-3)); 
-                P5 = 3.7 * (10 ** (-2));
-                
                 // K24 is the cell division rate constant, from calculations of  
                 // cell doubling time
-                K24 = 1.28 * (10 ** (-4))
+                K24 = 1.28 * (10 ^ (-4))
+                
+                TesA = 0
+                Pdc_AdhB = 0
+                AtfA = 0 
+                FadD = 0
+                FadR = 0
+                FadR_FA = 0
+                FadR_acyl_CoA = 0
+                FadR_P2 = 0
+                FadR_P3 = 0
+                FadR_P4 = 0
+                FAEE = 0
+                FA = 0
+                acyl_CoA = 0
+                ETOH = 0
+                
+                // P_init from Supplementary Table 3
+                P1 = 1.2 * (10 ^ (-4)); 
+                P2 = 5.2 * (10 ^ (-3)); 
+                P3 = 5.4 * (10 ^ (-3));
+                P4 = 6.0 * (10 ^ (-3)); 
+                P5 = 3.7 * (10 ^ (-2));
 
                 end
                 '''
 
 r3 = te.loada(modelstring3)
-model3 = r3.simulate(0, 4500, 1000)
+model3 = r3.simulate(0, 4500, steps=1000)
+#df_model3 = pd.DataFrame(model3)
 r3.plot(model3, title=" ")
-
 
 # Question 4
 modelstring4 = '''
