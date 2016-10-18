@@ -5,9 +5,42 @@ Created on Sat Oct 08 16:42:17 2016
 """
 import tellurium as te
 
-# Question 2
-modelstring2 =  '''
-                model question2()
+r = te.loada('''
+R10: FadR + FA => FadR_FA; k6 * FadR * FA 
+R11: FadR + acyl_CoA => FadR_acyl_CoA; k7 * FadR * acyl_CoA
+R12: FadR_FA => FadR + FA; k8_FA * FadR_FA
+R13: FadR_acyl_CoA => FadR + acyl_CoA; k8_acyl_CoA * FadR_acyl_CoA
+R16: FadR + P3 => FadR_P3; k11 * FadR * P3
+R17: FadR_P3 => FadR + P3; k12 * FadR_P3
+R18: FadR + P4 => FadR_P4; k13 * FadR * P4
+R19: FadR_P4 => FadR + P4; k14 * FadR_P4
+
+k6 = 1; k7 = 2; k8_FA = 3; k8_acyl_CoA = 4; 
+k11 = 5; k12 = 6; k13 = 7; k14 = 8;
+
+FA = 5;
+acyl_CoA = 8;
+FadR = 4;
+FadR_FA = 3;
+FadR_acyl_CoA = 7;
+P3 = 2;
+FadR_P3 = 1;
+P4 = 9;
+FadR_P4 = 6;
+''')
+
+# reaction rate vector
+print(r.getReactionRates())
+
+# get concentrations of X & Y
+print(r.getFloatingSpeciesConcentrations())
+
+# get the stoichiometry matrix
+print(r.getFullStoichiometryMatrix())
+
+# Question 3
+modelstring3 =  '''
+                model question3()
 
                 // Gene expression
                 R1: => FadR; k5
@@ -26,13 +59,12 @@ modelstring2 =  '''
                 R9: => ETOH; k4
                     // Pdc_adhB => Pdc_AdhB + ETOH; Pdc_adhB is a catalyst
 
-                //Note: FADR-ligand binding and FadR-promoter binding constants
+                // Note: FADR-ligand binding and FadR-promoter binding constants
                 // can be found by the following equation
                 // kx * (Ki / (Ki + [IC]))
                 // where [IC] is inhibitor concentration
                 // Ki is enzyme inhibition constant
                 // See description of Supplementary figure 6 for more info
-
 
                 // FadR-ligand binding
                 R10: FadR + FA => FadR-FA; FadR * FA * k6
@@ -131,19 +163,26 @@ modelstring2 =  '''
                 end
                 '''
 
-r2 = te.loada(modelstring2)
-
-model2 = r2.simulate(0, 18 * 60 * 60, 1000)
-# End time: 18 hr * 60 min/hr * 60 s/min
-r2.plot(model2)
-
-
-# Question 3
-modelstring3 = '''
-                model question3()
-
-                '''
-
 r3 = te.loada(modelstring3)
 model3 = r3.simulate(0, 4500, 1000)
 r3.plot(model3, title=" ")
+
+
+# Question 4
+modelstring4 = '''
+                model question4()
+
+                '''
+
+r4 = te.loada(modelstring4)
+model4 = r4.simulate(0, 4500, 1000)
+r4.plot(model4, title=" ")
+
+"""
+plt.plot(model3[:,0], model3[:,5], label='Vol')
+plt.title("k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
+plt.xlabel('Time in s')   
+plt.ylabel('Cell Volume')
+plt.legend()
+plt.show()
+"""
