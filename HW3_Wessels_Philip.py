@@ -53,11 +53,11 @@ modelstring3 =  '''
                 // Note K5, K15 to K18 are first order rate constants for gene 
                 // expression from DNA species P1 to P5, calculated in the HW 
                 // document
-                K5 = 3.48 * (10 ^ (-2))
-                K15 = 9.31 * (10 ^ (-3))
-                K16 = 1.43 * (10 ^ (-2))
-                K17 = 3.99 * (10 ^ (-2))
-                K18 = 1.48 * (10 ^ (-2))
+                K5 = 3.48 * (10 ** (-2))
+                K15 = 9.31 * (10 ** (-3))
+                K16 = 1.43 * (10 ** (-2))
+                K17 = 3.99 * (10 ** (-2))
+                K18 = 1.48 * (10 ** (-2))
 
                 // FAEE biosynthesis
                 R6: => FA; K1
@@ -69,10 +69,10 @@ modelstring3 =  '''
                 R9: => ETOH; K4
                     // Pdc_adhB => Pdc_AdhB + ETOH; Pdc_adhB is a catalyst
                     
-                K1 = 4.9 * (10 ^ (1))
-                K2 = 5.5 * (10 ^ (-3))
-                K3 = 3.4 * (10 ^ (-3))
-                K4 = 3.8 * (10 ^ (2))
+                K1 = 4.9 * (10 ** (1))
+                K2 = 5.5 * (10 ** (-3))
+                K3 = 3.4 * (10 ** (-3))
+                K4 = 3.8 * (10 ** (2))
 
                 // FadR_ligand binding
                 R10: FadR + FA => FadR_FA; FadR * FA * K6
@@ -83,10 +83,10 @@ modelstring3 =  '''
                 // K6 and K7 are constants for association
                 // K8_FA and K8_acyl_CoA are constants for dissociation, 
                 // source shown in the HW document
-                K6 = 1.9 * (10 ^ (-2))
-                K7 = 1.9 * (10 ^ (-2))
-                K8_FA = 9.3 * (10 ^ (-8))
-                K8_acyl_CoA = 9.3 * (10 ^ (-11))
+                K6 = 1.9 * (10 ** (-2))
+                K7 = 1.9 * (10 ** (-2))
+                K8_FA = 9.3 * (10 ** (-8))
+                K8_acyl_CoA = 9.3 * (10 ** (-11))
                 
                 // FadR_Promoter binding
                 R14: FadR + P2 => FadR_P2; FadR * P2 * K9
@@ -99,12 +99,12 @@ modelstring3 =  '''
                 // K9,11,13 are constants for association
                 // K10,12,14 are constants for dissociation
                 // source shown in the HW document
-                K9 = 1.9 * (10 ^ (-2))
-                K10 = 1.3 * (10 ^ (-1))
-                K11 = 1.9 * (10 ^ (-2))
-                K12 = 1.3 * (10 ^ (-1))
-                K13 = 1.9 * (10 ^ (-2))
-                K14 = 1.3 * (10 ^ (-1))
+                K9 = 1.9 * (10 ** (-2))
+                K10 = 1.3 * (10 ** (-1))
+                K11 = 1.9 * (10 ** (-2))
+                K12 = 1.3 * (10 ** (-1))
+                K13 = 1.9 * (10 ** (-2))
+                K14 = 1.3 * (10 ** (-1))
 
                 // Reactions R20 to R37 account for loss of species due to
                 // cell growth associated dilution, degradation, and secretion
@@ -130,11 +130,11 @@ modelstring3 =  '''
                 R36: acyl_CoA => ; K22
                 R37: ETOH => ; K23
                 
-                K19 =
-                K20 =
-                K21 =
-                K22 =
-                K23 =
+                K19 = 6.3 * (10 ** (-5))
+                K20 = 6.3 * (10 ** (-5))
+                K21 = 6.3 * (10 ** (-5))
+                K22 = 6.3 * (10 ** (-5))
+                K23 = 6.3 * (10 ** (-5))
 
                 // DNA replication
                 
@@ -147,14 +147,15 @@ modelstring3 =  '''
                 R44: FadR_P3 => FadR_P3 + FadR_P3; K24
                 R45: FadR_P4 => FadR_P4 + FadR_P4; K24
                 
-                P1 = 1.2 * (10 ^ (-4)); 
-                P2 = 5.2 * (10 ^ (-3)); 
-                P3 = 5.4 * (10 ^ (-3));
-                P4 = 6.0 * (10 ^ (-3)); 
-                P5 = 3.7 * (10 ^ (-2));
+                P1 = 1.2 * (10 ** (-4)); 
+                P2 = 5.2 * (10 ** (-3)); 
+                P3 = 5.4 * (10 ** (-3));
+                P4 = 6.0 * (10 ** (-3)); 
+                P5 = 3.7 * (10 ** (-2));
                 
-                // K24 is the cell division rate constant
-                K24 = 
+                // K24 is the cell division rate constant, from calculations of  
+                // cell doubling time
+                K24 = 1.28 * (10 ** (-4))
 
                 end
                 '''
