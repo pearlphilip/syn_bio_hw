@@ -5,7 +5,8 @@ Created on Sat Oct 08 16:42:17 2016
 """
 import tellurium as te
 
-r = te.loada('''
+# Question 2
+r2 = te.loada('''
 R10: FadR + FA => FadR_FA; k6 * FadR * FA 
 R11: FadR + acyl_CoA => FadR_acyl_CoA; k7 * FadR * acyl_CoA
 R12: FadR_FA => FadR + FA; k8_FA * FadR_FA
@@ -30,13 +31,13 @@ FadR_P4 = 6;
 ''')
 
 # reaction rate vector
-print(r.getReactionRates())
+print(r2.getReactionRates())
 
 # get concentrations of X & Y
-print(r.getFloatingSpeciesConcentrations())
+print(r2.getFloatingSpeciesConcentrations())
 
 # get the stoichiometry matrix
-print(r.getFullStoichiometryMatrix())
+print(r2.getFullStoichiometryMatrix())
 
 # Question 3
 modelstring3 =  '''
@@ -177,12 +178,3 @@ modelstring4 = '''
 r4 = te.loada(modelstring4)
 model4 = r4.simulate(0, 4500, 1000)
 r4.plot(model4, title=" ")
-
-"""
-plt.plot(model3[:,0], model3[:,5], label='Vol')
-plt.title("k1 = every %is k2 = every %is k3 = every %is k4 = every %is"%(i, j, k, l))
-plt.xlabel('Time in s')   
-plt.ylabel('Cell Volume')
-plt.legend()
-plt.show()
-"""
