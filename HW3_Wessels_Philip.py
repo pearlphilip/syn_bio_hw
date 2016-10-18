@@ -68,7 +68,8 @@ modelstring3 =  '''
                     // AtfA + ETOH + acyl_CoA => AtfA + FAEE; AtfA is a catalyst
                 R9: => ETOH; K4
                     // Pdc_adhB => Pdc_AdhB + ETOH; Pdc_adhB is a catalyst
-                    
+               
+                // Rate constants k1 to k4 from Supplementary Table 3
                 K1 = 4.9 * (10 ** (1))
                 K2 = 5.5 * (10 ** (-3))
                 K3 = 3.4 * (10 ** (-3))
@@ -147,6 +148,7 @@ modelstring3 =  '''
                 R44: FadR_P3 => FadR_P3 + FadR_P3; K24
                 R45: FadR_P4 => FadR_P4 + FadR_P4; K24
                 
+                // P_init from Supplementary Table 3
                 P1 = 1.2 * (10 ** (-4)); 
                 P2 = 5.2 * (10 ** (-3)); 
                 P3 = 5.4 * (10 ** (-3));
