@@ -114,6 +114,12 @@ modelstring3 =  '''
                 R43: FadR-P2 = > FadR-P2 + FadR-P2; k24
                 R44: FadR-P3 = > FadR-P3 + FadR-P3; k24
                 R45: FadR-P4 = > FadR-P4 + FadR-P4; k24
+                
+                P1 = 1.2 * (10 ^ (-4)); 
+                P2 = 5.2 * (10 ^ (-3)); 
+                P3 = 5.4 * (10 ^ (-3));
+                P4 = 6.0 * (10 ^ (-3)); 
+                P5 = 3.7 * (10 ^ (-2));
 
                 // Set rate constants
 
