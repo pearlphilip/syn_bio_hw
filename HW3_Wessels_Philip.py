@@ -68,7 +68,7 @@ modelstring3 =  '''
                 R8: ETOH + acyl_CoA => FAEE; ETOH * acyl_CoA * K3
                     // AtfA + ETOH + acyl_CoA => AtfA + FAEE; AtfA is a catalyst
                 R9: => ETOH; K4
-                    // Pdc_adhB => Pdc_AdhB + ETOH; Pdc_adhB is a catalyst
+                    // Pdc_AdhB => Pdc_AdhB + ETOH; Pdc_AdhB is a catalyst
                
                 // Rate constants k1 to k4 from Supplementary Table 3
                 K1 = 4.9 * (10 ^ (1))
@@ -184,11 +184,11 @@ model3 = r3.simulate(0, 4500, steps=1000)
 r3.plot(model3, title=" ")
 
 # Question 4
-modelstring4 = '''
+modelstring4 =  '''
                 model question4()
 
                 '''
 
 r4 = te.loada(modelstring4)
-model4 = r4.simulate(0, 4500, 1000)
+model4 = r4.simulate(0, 4500, steps=1000)
 r4.plot(model4, title=" ")
