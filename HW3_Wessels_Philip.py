@@ -6,6 +6,7 @@ Created on Sat Oct 08 16:42:17 2016
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
+import pprint
 import tellurium as te
 
 # Question 2
@@ -44,11 +45,11 @@ modelstring3 =  '''
                 model question3()
 
                 // Gene expression
-                R1: => FadR; K5 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                R2: => Pdc_AdhB; K15 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                R3: => AtfA; K16 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                R4: => TesA; K17 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                R5: => FadD; K18 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
+                R1: => FadR; K5 
+                R2: => Pdc_AdhB; K15 
+                R3: => AtfA; K16 
+                R4: => TesA; K17
+                R5: => FadD; K18 
                 
                 // Note K5, K15 to K18 are first order rate constants for gene 
                 // expression from DNA species P1 to P5, calculated in the HW 
@@ -60,14 +61,10 @@ modelstring3 =  '''
                 K18 = 1.48 * (10 ^ (-2)) 
 
                 // FAEE biosynthesis
-                R6: => FA; K1 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                    // TesA => TesA + FA; TesA is a catalyst
-                R7: FA => acyl_CoA; FA * K2 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                    // FadD + FA => FadD + acyl_CoA; FA is a catalyst
-                R8: ETOH + acyl_CoA => FAEE; ETOH * acyl_CoA * K3 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                    // AtfA + ETOH + acyl_CoA => AtfA + FAEE; AtfA is a catalyst
-                R9: => ETOH; K4 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
-                    // Pdc_AdhB => Pdc_AdhB + ETOH; Pdc_AdhB is a catalyst
+                R6: TesA => TesA + FA; K1 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
+                R7: FadD + FA => FadD + acyl_CoA; FA * K2 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
+                R8: AtfA + ETOH + acyl_CoA => AtfA + FAEE; ETOH * acyl_CoA * K3 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
+                R9: Pdc_AdhB => Pdc_AdhB + ETOH; K4 * (Ki_ETOH / (Ki_ETOH + ETOH)) * (Ki_CoA / (Ki_CoA + acyl_CoA))
                
                 // Rate constants k1 to k4 from Supplementary Table 3
                 K1 = 4.9 * (10 ^ (1)) 
@@ -160,9 +157,9 @@ modelstring3 =  '''
                 FadR = 0
                 FadR_FA = 0
                 FadR_acyl_CoA = 0
-                FAEE = 10000
+                FAEE = 0
                 FA = 0
-                acyl_CoA = 0.01
+                acyl_CoA = 0
                 ETOH = 0
                 
                 // P_init from Supplementary 3 for k calculations
@@ -175,11 +172,11 @@ modelstring3 =  '''
                 // P and P_complexes initial values for dynamic control system  
                 // from Supplementary 7
                 P1 = 10 
-                P2 = 0
+                P2 = 20
                 FadR_P2 = 20
-                P3 = 0
+                P3 = 50
                 FadR_P3 = 50
-                P4 = 0
+                P4 = 50
                 FadR_P4 = 50
                 P5 = 10 
                 
@@ -215,14 +212,10 @@ modelstring4 =  '''
                 K18 = 1.48 * (10 ^ (-2))
 
                 // FAEE biosynthesis
-                R6: => FA; K1
-                    // TesA => TesA + FA; TesA is a catalyst
-                R7: FA => acyl_CoA; FA * K2
-                    // FadD + FA => FadD + acyl_CoA; FA is a catalyst
-                R8: ETOH + acyl_CoA => FAEE; ETOH * acyl_CoA * K3
-                    // AtfA + ETOH + acyl_CoA => AtfA + FAEE; AtfA is a catalyst
-                R9: => ETOH; K4
-                    // Pdc_AdhB => Pdc_AdhB + ETOH; Pdc_AdhB is a catalyst
+                R6: TesA => TesA + FA; K1
+                R7: FadD + FA => FadD + acyl_CoA; FA * K2
+                R8: AtfA + ETOH + acyl_CoA => AtfA + FAEE; ETOH * acyl_CoA * K3
+                R9: Pdc_AdhB => Pdc_AdhB + ETOH; K4
                
                 // Rate constants k1 to k4 from Supplementary Table 3
                 K1 = 4.9 * (10 ^ (1))
@@ -315,9 +308,9 @@ modelstring4 =  '''
                 FadR = 0
                 FadR_FA = 0
                 FadR_acyl_CoA = 0
-                FAEE = 10000
+                FAEE = 0
                 FA = 0
-                acyl_CoA = 0.01
+                acyl_CoA = 0
                 ETOH = 0
                 
                 // P_init from Supplementary 3 for k calculations
@@ -345,3 +338,4 @@ r4 = te.loada(modelstring4)
 r4.timeCourseSelections = ['time', '[FAEE]']
 model4 = r4.simulate(0, 4500, steps=1000)
 r4.plot(model4, title="FAEE trend in static control system")
+
