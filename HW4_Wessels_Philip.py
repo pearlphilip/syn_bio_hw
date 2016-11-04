@@ -34,9 +34,8 @@ r2 = te.loada('''
                 tetR = 0; lacI = 0; glk = 0;
 
                 # Dilution occurs as the cell divides, therefore k_cell_div =
-                # k_dilution and is calculated from standard cell doubling
-                # time
-                k_cell_div = 1.28 *(10 ^(-4)); k_dilution = 1.28 *(10 ^(-4));
+                # is calculated from standard cell doubling time
+                k_cell_div = 1.28 *(10 ^(-4)); 
                 ''')
 
 # get the stoichiometry matrix
@@ -70,10 +69,9 @@ modelstring3 = ('''
                 RNA_tetR = 0; RNA_lacI = 0; RNA_glk = 0;
                 tetR = 0; lacI = 0; glk = 0;
 
-                # Dilution occurs as the cell divides, therefore k_cell_div =
-                # k_dilution and is calculated from standard cell doubling
-                # time
-                k_cell_div = 1.28 *(10 ^(-4)); k_dilution = 1.28 *(10 ^(-4));
+                 # Dilution occurs as the cell divides, therefore k_cell_div =
+                 # is calculated from standard cell doubling time
+                k_cell_div = 1.28 *(10 ^(-4)); 
                 ''')
 
 r3 = te.loada(modelstring3)
@@ -122,11 +120,10 @@ modelstring4 = ('''
                 tetR = 0; lacI = 0; glk = 0; DNA_lacI = 1; DNA gk = 1; DNA_tetR = 1;
 
                 # Dilution occurs as the cell divides, therefore k_cell_div =
-                # k_dilution and is calculated from standard cell doubling
-                # time
-                k_cell_div = 1.28 *(10 ^(-4)); k_dilution = 1.28 *(10 ^(-4));
+                # is calculated from standard cell doubling time
+                k_cell_div = 1.28 *(10 ^(-4)); 
                 ''')
-
+aTc = 
 r4 = te.loada(modelstring4)
 r4.timeCourseSelections = ['time', '[glk]']
 model4 = r4.simulate(0, 400, steps=1000)
