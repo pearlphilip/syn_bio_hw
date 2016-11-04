@@ -107,6 +107,9 @@ modelstring4 = ('''
                 R17: aTc_RNA_tetR_complex => RNA_tetR; k17 * aTc;
                 # k12 is the degredation rate of lacI; vary this and plot on x axis
 
+                R18: IPTG + lacI => IPTG_lacI_complex; k18 * IPTG * lacI;
+                R19: IPTG_lacI_complex => lacI; k19 * IPTG_lacI_complex;
+
                 # Degradation, dilution and cell division
                 R7: RNA_lacI => ; k_cell_div
                 R8: RNA_glk => ; k_cell_div
