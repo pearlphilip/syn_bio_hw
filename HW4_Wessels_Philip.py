@@ -22,13 +22,13 @@ R5: RNA_glk => glk; k5 * RNA_glk;
 
 # Inhibition
 R6: lacI + DNA_glk => lacI_DNA_glk_complex; k6 * lacI * DNA_glk;
-R7: lacI_DNA_glk_complex => DNA_glk + lacI; k7 * lacI_DNA_glk_complex;
+R7: lacI_DNA_glk_complex => DNA_glk; k7 * lacI_DNA_glk_complex;
 R8: RNA_tetR + DNA_lacI => RNA_tetR_DNA_lacI_complex; k8 * RNA_tetR * DNA_lacI;
-R9: RNA_tetR_DNA_lacI_complex => DNA_lacI + RNA_tetR; k9 * RNA_tetR_DNA_lacI_complex;
+R9: RNA_tetR_DNA_lacI_complex => DNA_lacI; k9 * RNA_tetR_DNA_lacI_complex;
 R10: aTc + RNA_tetR => aTc_RNA_tetR_complex; k10 * aTc * RNA_tetR;
-R11: aTc_RNA_tetR_complex => RNA_tetR + aTc; k11 * aTc_RNA_tetR_complex;
+R11: aTc_RNA_tetR_complex => RNA_tetR; k11 * aTc_RNA_tetR_complex;
 R12: IPTG + lacI => IPTG_lacI_complex; k12 * IPTG * lacI;
-R13: IPTG_lacI_complex => lacI + IPTG; k13 * IPTG_lacI_complex;
+R13: IPTG_lacI_complex => lacI; k13 * IPTG_lacI_complex;
 
 # Dilution due to cell division
 R14: RNA_tetR => ; k_cell_div;
@@ -52,7 +52,6 @@ k1 = 10; k2 = 10; k3 = 10;
 k4 = 10; k5 = 10;
 k6 = 10; k7 = 10; k8 = 10; k9 = 10; k10 = 10; k11 = 10;
 k12 = 10; k13 = 10;
-k14 = 10; k15 = 10; k16 = 10; k17 = 10; k18 = 10;
 
 ''')
 aTc = 0; IPTG = 0;
@@ -83,13 +82,13 @@ R5: RNA_glk => glk; k5 * RNA_glk;
 
 # Inhibition
 R6: lacI + DNA_glk => lacI_DNA_glk_complex; k6 * lacI * DNA_glk;
-R7: lacI_DNA_glk_complex => DNA_glk + lacI; k7 * lacI_DNA_glk_complex;
+R7: lacI_DNA_glk_complex => DNA_glk; k7 * lacI_DNA_glk_complex;
 R8: RNA_tetR + DNA_lacI => RNA_tetR_DNA_lacI_complex; k8 * RNA_tetR * DNA_lacI;
-R9: RNA_tetR_DNA_lacI_complex => DNA_lacI + RNA_tetR; k9 * RNA_tetR_DNA_lacI_complex;
+R9: RNA_tetR_DNA_lacI_complex => DNA_lacI; k9 * RNA_tetR_DNA_lacI_complex;
 R10: aTc + RNA_tetR => aTc_RNA_tetR_complex; k10 * aTc * RNA_tetR;
-R11: aTc_RNA_tetR_complex => RNA_tetR + aTc; k11 * aTc_RNA_tetR_complex;
+R11: aTc_RNA_tetR_complex => RNA_tetR; k11 * aTc_RNA_tetR_complex;
 R12: IPTG + lacI => IPTG_lacI_complex; k12 * IPTG * lacI;
-R13: IPTG_lacI_complex => lacI + IPTG; k13 * IPTG_lacI_complex;
+R13: IPTG_lacI_complex => lacI; k13 * IPTG_lacI_complex;
 
 # Dilution due to cell division
 R14: RNA_tetR => ; k_cell_div;
@@ -125,11 +124,7 @@ k10 = 35;
 k11 = 25;
 k12 = 20;
 k13 = 15;
-k14 = 10;
-k15 = 8;
-k16 = 6;
-k17 = 4;
-k18 = 2;
+
 ''')
 modelstring_aTc_IPTG = modelstring3 + "aTc = 0; IPTG = 0;"
 
@@ -210,13 +205,13 @@ R5: RNA_glk => glk; k5 * RNA_glk;
 
 # Inhibition
 R6: lacI + DNA_glk => lacI_DNA_glk_complex; k6 * lacI * DNA_glk;
-R7: lacI_DNA_glk_complex => DNA_glk + lacI; k7 * lacI_DNA_glk_complex;
+R7: lacI_DNA_glk_complex => DNA_glk; k7 * lacI_DNA_glk_complex;
 R8: RNA_tetR + DNA_lacI => RNA_tetR_DNA_lacI_complex; k8 * RNA_tetR * DNA_lacI;
-R9: RNA_tetR_DNA_lacI_complex => DNA_lacI + RNA_tetR; k9 * RNA_tetR_DNA_lacI_complex;
+R9: RNA_tetR_DNA_lacI_complex => DNA_lacI; k9 * RNA_tetR_DNA_lacI_complex;
 R10: aTc + RNA_tetR => aTc_RNA_tetR_complex; k10 * aTc * RNA_tetR;
-R11: aTc_RNA_tetR_complex => RNA_tetR + aTc; k11 * aTc_RNA_tetR_complex;
+R11: aTc_RNA_tetR_complex => RNA_tetR; k11 * aTc_RNA_tetR_complex;
 R12: IPTG + lacI => IPTG_lacI_complex; k12 * IPTG * lacI;
-R13: IPTG_lacI_complex => lacI + IPTG; k13 * IPTG_lacI_complex;
+R13: IPTG_lacI_complex => lacI; k13 * IPTG_lacI_complex;
 
 # Dilution due to cell division
 R14: RNA_tetR =>; k_cell_div;
@@ -243,10 +238,9 @@ k1 = 10; k2 = 10; k3 = 10;
 k4 = 10; k5 = 10;
 k6 = 10; k7 = 10; k8 = 10; k9 = 10; k10 = 10; k11 = 10;
 k12 = 10; k13 = 10;
-k14 = 10; k15 = 10; k16 = 10; k17 = 10; k18 = 10;
 
 ''')
-kdeg_matrix = numpy.linspace(10**(-6), 10, num=10);
+kdeg_matrix = numpy.linspace(10**(-8), 50, num=20);
 glk_kdeg = []
 for i in kdeg_matrix:
     kdeg_value = i
