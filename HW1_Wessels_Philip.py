@@ -15,15 +15,15 @@ modelstring1 = '''
                 
                 k1 = 1 / 10; k2 = 1 / 20; k3 = 1 / 30;
                 k4 = 1 / 10; k5 = 1 / 100; k6 = 1 / 1000;
-                J1: -> S3; (k4 * S1) * k1;
-                J2: -> S4; (k4 * S1) * k2;
-                J3: -> S5; (k4 * S1) * k3;
-                J4: -> S6; (k5 * S1) * k1;
-                J5: -> S7; (k5 * S1) * k2;
-                J6: -> S8; (k5 * S1) * k3;
-                J7: -> S9; (k6 * S1) * k1;
-                J8: -> S10; (k6 * S1) * k2;
-                J9: -> S11; (k6 * S1) * k3;
+                J1: => S3; (k4 * S1) * k1;
+                J2: => S4; (k4 * S1) * k2;
+                J3: => S5; (k4 * S1) * k3;
+                J4: => S6; (k5 * S1) * k1;
+                J5: => S7; (k5 * S1) * k2;
+                J6: => S8; (k5 * S1) * k3;
+                J7: => S9; (k6 * S1) * k1;
+                J8: => S10; (k6 * S1) * k2;
+                J9: => S11; (k6 * S1) * k3;
                 
                 // S1 is DNA, S2 is RNA, S3 to S11 are protein products
                 // Initial amounts of each species:
@@ -55,15 +55,15 @@ modelstring2 = '''
                 // We use a rate constant k7 to denote this
 
                 k7 = 1 / (1 * 60 * 60);
-                J10: S3 -> ; k7 * S3
-                J11: S4 -> ; k7 * S4
-                J12: S5 -> ; k7 * S5
-                J13: S6 -> ; k7 * S6
-                J14: S7 -> ; k7 * S7
-                J15: S8 -> ; k7 * S8
-                J16: S9 -> ; k7 * S9
-                J17: S10 -> ; k7 * S10
-                J18: S11 -> ; k7 * S11
+                J10: S3 => ; k7 * S3
+                J11: S4 => ; k7 * S4
+                J12: S5 => ; k7 * S5
+                J13: S6 => ; k7 * S6
+                J14: S7 => ; k7 * S7
+                J15: S8 => ; k7 * S8
+                J16: S9 => ; k7 * S9
+                J17: S10 => ; k7 * S10
+                J18: S11 => ; k7 * S11
              ''' 
 
 modelstring2 += modelstring1_body_info

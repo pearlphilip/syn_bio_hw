@@ -113,16 +113,16 @@ plt.show()
 ### Question 3
 modelstring3 = '''
                 # Protein1 is Insulin, Protein2 is GFP
-                R1: -> RNA1; k1;
-                R2: -> Protein1; k2 * RNA1;
-                R3: -> RNA2; k3;
-                R4: -> Protein2; k4 * RNA2;
-                R5: RNA1 -> ; k_deg1 * RNA1; # RNA degradation
-                R6: RNA2 -> ; k_deg2 * RNA2; # RNA degradation
-                R7: -> Vol; k_cell_div * Vol; # Cell division
-                R8: -> RNA1; k_dilution * RNA1; # RNA dilution
-                R9: -> RNA2; k_dilution * RNA2; # RNA dilution
-                R10: -> Protein2; k_dilution * Protein2; # GFP dilution
+                R1: => RNA1; k1;
+                R2: => Protein1; k2 * RNA1;
+                R3: => RNA2; k3;
+                R4: => Protein2; k4 * RNA2;
+                R5: RNA1 => ; k_deg1 * RNA1; # RNA degradation
+                R6: RNA2 => ; k_deg2 * RNA2; # RNA degradation
+                R7: => Vol; k_cell_div * Vol; # Cell division
+                R8: => RNA1; k_dilution * RNA1; # RNA dilution
+                R9: => RNA2; k_dilution * RNA2; # RNA dilution
+                R10: => Protein2; k_dilution * Protein2; # GFP dilution
  
                 #variables that get set by python code
                 RNA1 = 0; Protein1 = 0; RNA2 = 0; Protein2 = 0; Vol = 10
