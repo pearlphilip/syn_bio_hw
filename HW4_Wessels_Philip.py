@@ -111,24 +111,25 @@ k_cell_div = 1.28 *(10 ^(-4));
 # We need to vary k1 to k18 till we get a sigmoid dependancy of glk expression 
 # levels on increasing aTc concentrations
 
-k1 = 10;
-k2 = 90;
-k3 = 80;
-k4 = 70;
-k5 = 60;
-k6 = 50;
-k7 = 45;
-k8 = 40;
-k9 = 35;
-k10 = 35; 
-k11 = 25;
-k12 = 20;
-k13 = 15;
+k1 = 10 * (10 ^ (-4));
+k2 = 90 * (10 ^ (-4));
+k3 = 80 * (10 ^ (-4));
+k4 = 70 * (10 ^ (-5));
+k5 = 60 * (10 ^ (-5));
+k6 = 50 * (10 ^ (-3));
+k7 = 45 * (10 ^ (-3));
+k8 = 40 * (10 ^ (-3));
+k9 = 35 * (10 ^ (-3));
+k10 = 35 * (10 ^ (-3)); 
+k11 = 25 * (10 ^ (-3));
+k12 = 20 * (10 ^ (-1));
+k13 = 15 * (10 ^ (-1));
 
 ''')
-modelstring_aTc_IPTG = modelstring3 + "aTc = 0; IPTG = 0;"
 
-r3 = te.loada(modelstring_aTc_IPTG)
+r3 = te.loada(modelstring3)
+r3.aTc = 0;
+r3.IPTG = 0;
 model3 = r3.simulate(0, 1000, steps=1000)
 plt.plot(model3[:,0], model3[:,1], label='DNA_tetR')
 plt.plot(model3[:,0], model3[:,2], label='RNA_tetR')
@@ -158,14 +159,15 @@ plt.ylabel('Species density')
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 plt.show()
     
-aTc_matrix = numpy.linspace(0, 2.16*(10**(-7)), num=6); 
-IPTG_matrix = numpy.linspace(0, 10**(-4), num=6);
+aTc_matrix = numpy.linspace(0, 2.16*(10**(-7)), num=10); 
+IPTG_matrix = numpy.linspace(0, 10**(-4), num=10);
 glk_aTc = []
+glk_IPTG = []
+
 for i in aTc_matrix:
-    aTc_value = i
-    IPTG_value = 0
-    modelstring_aTc_IPTG = modelstring3 + "aTc = %d; IPTG = %d;" % (aTc_value, IPTG_value)
-    r3 = te.loada(modelstring_aTc_IPTG)
+    r3 = te.loada(modelstring3)
+    r3.aTc = i;
+    r3.IPTG = 0;
     r3.timeCourseSelections = ['time', '[glk]']
     model3 = r3.simulate(0, 27*60*60, steps=1000)
     glk_aTc.append(model3[-1, 1])
@@ -175,12 +177,10 @@ plt.xlabel('aTc concentrations')
 plt.ylabel('glk species density')
 plt.show()
 
-glk_IPTG = []
 for j in IPTG_matrix:
-    IPTG_value = j
-    aTc_value = 0
-    modelstring_aTc_IPTG = modelstring3 + "aTc = %d; IPTG = %d;" % (aTc_value, IPTG_value)
-    r3 = te.loada(modelstring_aTc_IPTG)
+    r3 = te.loada(modelstring3)
+    r3.aTc = 0;
+    r3.IPTG = j;
     r3.timeCourseSelections = ['time', '[glk]']
     model3 = r3.simulate(0, 27*60*60, steps=1000)
     glk_IPTG.append(model3[-1, 1])
